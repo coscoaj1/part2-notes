@@ -39,7 +39,7 @@
     {
       "content": "save",
       "date": "2021-07-24T19:43:15.077Z",
-      "important": false,
+      "important": true,
       "id": 7
     },
     {
@@ -83,6 +83,18 @@
       "date": "2021-07-24T19:51:20.745Z",
       "important": false,
       "id": 14
+    },
+    {
+      "content": "add",
+      "date": "2021-07-24T22:21:23.769Z",
+      "important": true,
+      "id": 15
+    },
+    {
+      "content": "pay bills",
+      "date": "2021-07-25T11:53:02.966Z",
+      "important": true,
+      "id": 16
     }
   ]
 }
