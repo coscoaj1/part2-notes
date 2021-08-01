@@ -39,7 +39,7 @@
     {
       "content": "save",
       "date": "2021-07-24T19:43:15.077Z",
-      "important": true,
+      "important": false,
       "id": 7
     },
     {
@@ -87,14 +87,26 @@
     {
       "content": "add",
       "date": "2021-07-24T22:21:23.769Z",
-      "important": true,
+      "important": false,
       "id": 15
     },
     {
       "content": "pay bills",
       "date": "2021-07-25T11:53:02.966Z",
-      "important": true,
+      "important": false,
       "id": 16
+    },
+    {
+      "content": "save",
+      "date": "2021-07-25T12:10:44.824Z",
+      "important": false,
+      "id": 17
+    },
+    {
+      "content": "added",
+      "date": "2021-07-25T12:20:00.533Z",
+      "important": false,
+      "id": 18
     }
   ]
 }

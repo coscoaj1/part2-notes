@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import '../app.css';
 
 const Note = ({ note, toggleImportance }) => {
 	const label = note.important ? 'make not important' : 'make important';
@@ -6,7 +8,16 @@ const Note = ({ note, toggleImportance }) => {
 	return (
 		<li>
 			{note.content}
-			<button onClick={toggleImportance}>{label}</button>
+			<span className="makeImportant">
+				<Button
+					size="small"
+					variant="contained"
+					color="primary"
+					onClick={toggleImportance}
+				>
+					{label}
+				</Button>
+			</span>
 		</li>
 	);
 };
