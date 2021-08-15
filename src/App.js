@@ -1,7 +1,6 @@
 import React from 'react';
 import Note from './components/Note';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import noteService from './services/notes';
 import './app.css';
 import { Notification } from './components/Notification';
@@ -12,6 +11,8 @@ const App = () => {
 	const [newNote, setNewNote] = useState('');
 	const [showAll, setShowAll] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('some error happened');
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
 
 	useEffect(() => {
 		noteService //
@@ -20,6 +21,11 @@ const App = () => {
 				setNotes(initialNotes);
 			});
 	}, []);
+
+	const handleLogin = (event) => {
+		event.preventDefault();
+		console.log('logging in with', username, password);
+	};
 
 	const toggleImportanceOf = (id) => {
 		const note = notes.find((n) => n.id === id);
@@ -56,16 +62,16 @@ const App = () => {
 			});
 	};
 
-	const hook = () => {
-		console.log('effect');
-		axios.get('http://localhost:3001/notes').then((response) => {
-			console.log('promise fulfilled');
-			setNotes(response.data);
-		});
-	};
+	// const hook = () => {
+	// 	console.log('effect');
+	// 	axios.get('http://localhost:3001/notes').then((response) => {
+	// 		console.log('promise fulfilled');
+	// 		setNotes(response.data);
+	// 	});
+	// };
 
-	useEffect(hook, []);
-	console.log('render', notes.length, 'notes');
+	// useEffect(hook, []);
+	// console.log('render', notes.length, 'notes');
 
 	const handleNoteChange = (event) => {
 		setNewNote(event.target.value);
@@ -76,6 +82,27 @@ const App = () => {
 	return (
 		<div className="container">
 			<h1>Notes</h1>
+			<form onSubmit={handleLogin}>
+				<div>
+					username
+					<input
+						type="text"
+						value={username}
+						name="Username"
+						onChange={({ target }) => setUsername(target.value)}
+					/>
+				</div>
+				<div>
+					password
+					<input
+						type="password"
+						value={password}
+						name="Password"
+						onChange={({ target }) => setPassword(target.value)}
+					/>
+				</div>
+				<button type="submit">login</button>
+			</form>
 			<div>
 				<button onClick={() => setShowAll(!showAll)}>
 					show {showAll ? 'important' : 'all'}
