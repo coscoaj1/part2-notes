@@ -60,11 +60,11 @@ describe('Note app', function () {
 				cy.createNote({ content: 'third note', important: false });
 			});
 
-			it('one of those can be made important', function () {
+			it('other of those can be made important', function () {
 				cy.contains('show all').click();
-				cy.contains('second note').contains('make important').click();
-
-				cy.contains('second note').contains('make not important');
+				cy.contains('second note').parent().find('button').as('theButton');
+				cy.get('@theButton').click();
+				cy.get('@theButton').should('contain', 'make not important');
 			});
 		});
 
@@ -73,6 +73,13 @@ describe('Note app', function () {
 			cy.get('input').type('a note created by cypress');
 			cy.contains('save').click();
 			cy.contains('a note created by cypress');
+		});
+	});
+
+	it('then example', function () {
+		cy.get('button').then((buttons) => {
+			console.log('number of buttons', buttons.length);
+			cy.wrap(buttons[0]).click();
 		});
 	});
 });
