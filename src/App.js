@@ -9,7 +9,20 @@ import Notification from './components/Notification';
 import Footer from './components/Footer';
 import Togglable from './components/Togglable';
 import NoteForm from './components/NoteForm';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Header from './components/Header';
 
+const useStyles = makeStyles((theme) => ({
+	main: {
+		marginBottom: '25px',
+	},
+	root: {
+		flexGrow: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+}));
 const App = () => {
 	const [notes, setNotes] = useState([]);
 	const [showAll, setShowAll] = useState(false);
@@ -18,6 +31,7 @@ const App = () => {
 	const [password, setPassword] = useState('');
 	const [user, setUser] = useState(null);
 
+	const classes = useStyles();
 	const noteFormRef = useRef();
 
 	useEffect(() => {
@@ -115,31 +129,37 @@ const App = () => {
 
 	return (
 		<div className="container">
-			<h1>Notes</h1>
-			<Notification message={errorMessage} />
-			{user === null ? (
-				loginForm()
-			) : (
+			<Header user={user} handleLogout={handleLogout} />
+			<div className={classes.main}>
+				<Notification message={errorMessage} />
+				{user === null ? (
+					loginForm()
+				) : (
+					<div>
+						{/* <p>{user.name} logged in</p>
+						<button onClick={handleLogout}>logout</button> */}
+						{noteForm()}
+					</div>
+				)}
 				<div>
-					<p>{user.name} logged in</p>
-					<button onClick={handleLogout}>logout</button>
-					{noteForm()}
+					<button onClick={() => setShowAll(!showAll)}>
+						show {showAll ? 'important' : 'all'}
+					</button>
 				</div>
-			)}
-			<div>
-				<button onClick={() => setShowAll(!showAll)}>
-					show {showAll ? 'important' : 'all'}
-				</button>
 			</div>
-			<ul>
-				{notesToShow.map((note, i) => (
-					<Note
-						key={i}
-						note={note}
-						toggleImportance={() => toggleImportanceOf(note.id)}
-					/>
-				))}
-			</ul>
+
+			<div className={classes.root}>
+				<Grid container spacing={6}>
+					{notesToShow.map((note, i) => (
+						<Note
+							key={i}
+							note={note}
+							toggleImportance={() => toggleImportanceOf(note.id)}
+						/>
+					))}
+				</Grid>
+			</div>
+
 			<Footer />
 		</div>
 	);

@@ -5,11 +5,12 @@ body {
 }
 
 .container {
-	text-align: center;
+	margin: 0 auto;
 }
 
 li {
 	list-style: none;
+	color: #242f3d;
 }
 
 .makeImportant {
